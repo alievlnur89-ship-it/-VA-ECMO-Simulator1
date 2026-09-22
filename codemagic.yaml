@@ -7,6 +7,10 @@ workflows:
     environment:
       xcode: latest
 
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: com.vaecmo.simulator
+
     scripts:
       - name: Install XcodeGen
         script: |
@@ -16,16 +20,27 @@ workflows:
         script: |
           xcodegen generate
 
+      - name: Set up iOS signing
+        script: |
+          xcode-project use-profiles
+
       - name: Build iOS app
         script: |
           xcodebuild \
-            -project *.xcodeproj \
+            -project "VA Simulator.xcodeproj" \
             -scheme "VA Simulator" \
-            -sdk iphonesimulator \
+            -sdk iphoneos \
             -configuration Release \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            build
+            -archivePath build/VA-Simulator.xcarchive \
+            archive
+
+      - name: Export IPA
+        script: |
+          xcode-project build-ipa \
+            --project "VA Simulator.xcodeproj" \
+            --scheme "VA Simulator" \
+            --archive-flags "-archivePath build/VA-Simulator.xcarchive"
 
     artifacts:
-      - build/Build/Products/Release-iphonesimulator/*.app
+      - build/ios/ipa/*.ipa
+      - build/**/*.xcarchive
