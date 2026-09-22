@@ -4,14 +4,29 @@ options:
   bundleIdPrefix: com.vaecmo
   deploymentTarget:
     iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
 
 targets:
   VA Simulator:
     type: application
     platform: iOS
+
     sources:
-      - path: Sources
+      - path: VA Simulator
+
     settings:
       base:
+        PRODUCT_NAME: "VA Simulator"
         PRODUCT_BUNDLE_IDENTIFIER: com.vaecmo.simulator
+        GENERATE_INFOPLIST_FILE: YES
         SWIFT_VERSION: "5.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+
+    scheme:
+      gatherCoverageData: false
+      testTargets: []
