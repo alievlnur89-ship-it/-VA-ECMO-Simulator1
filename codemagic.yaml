@@ -19,13 +19,13 @@ workflows:
       - name: Build iOS app
         script: |
           xcodebuild \
-            -project "VA Simulator.xcodeproj" \
+            -project *.xcodeproj \
             -scheme "VA Simulator" \
-            -sdk iphoneos \
+            -sdk iphonesimulator \
             -configuration Release \
+            -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
             build
 
     artifacts:
-      - build/**/*.app
+      - build/Build/Products/Release-iphonesimulator/*.app
