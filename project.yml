@@ -2,17 +2,16 @@ name: VA Simulator
 
 options:
   bundleIdPrefix: com.vaecmo
+  deploymentTarget:
+    iOS: "17.0"
 
 targets:
   VA Simulator:
     type: application
     platform: iOS
-    deploymentTarget: "17.0"
-
     sources:
       - path: Sources
-
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: com.vaecmo.simulator
-      INFOPLIST_KEY_CFBundleDisplayName: VA-ECMO Simulator
-      SWIFT_VERSION: 5.0
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.vaecmo.simulator
+        SWIFT_VERSION: "5.0"
