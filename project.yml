@@ -17,7 +17,7 @@ targets:
     platform: iOS
 
     sources:
-      - path: VA Simulator
+      - path: .
 
     settings:
       base:
