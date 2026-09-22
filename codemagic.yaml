@@ -6,11 +6,16 @@ workflows:
 
     environment:
       xcode: latest
-      ios_signing:
-        distribution_type: development
-        bundle_identifier: com.vaecmo.simulator
 
     scripts:
+      - name: Install XcodeGen
+        script: |
+          brew install xcodegen
+
+      - name: Generate Xcode project
+        script: |
+          xcodegen generate
+
       - name: Build iOS app
         script: |
           xcodebuild \
@@ -23,4 +28,4 @@ workflows:
             build
 
     artifacts:
-      - build/ios/iphoneos/*.app
+      - build/**/*.app
